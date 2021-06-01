@@ -1,0 +1,21 @@
+{
+    "id": "com.jonandnic.podcastdirectory",
+    "version": "1.1.0",
+    "vendor": "Jon Wise",
+    "type": "web",
+    "main": "index.html",
+    "title": "Podcast Directory",
+    "icon": "icon.png",
+    "splashicon": "icon-256.png",
+    "uiRevision": "2",
+    "theme": "light",
+    "universalSearch": {
+        "search": {
+            "displayName": "Podcast Directory",
+            "url": "com.jonandnic.podcastdirectory",
+            "launchParam": {
+                "query": "#{searchTerms}"
+            }
+        }
+    }
+}
