@@ -341,7 +341,8 @@ MainAssistant.prototype.deactivate = function(event) {
     Mojo.Event.stopListening(this.controller.get("btnGet"), Mojo.Event.tap, this.handleClick);
     Mojo.Event.stopListening(this.controller.get("searchResultsList"), Mojo.Event.listTap, this.handleListClick);
     // Non-Mojo widgets
-    $("imgSearchClear").removeEventListener("click", this.handleClearTap);
+    $("btnClear").removeEventListener("click", this.handleClearTap);
+    this.controller.document.removeEventListener("keyup", this.keyupHandler);
 };
 
 MainAssistant.prototype.cleanup = function(event) {

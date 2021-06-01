@@ -71,7 +71,7 @@ DetailAssistant.prototype.activate = function(event) {
     $("divFullFeed").addEventListener("click", this.focusFullFeed.bind(this));
     $("txtFullFeed").addEventListener("click", this.focusFullFeed.bind(this));
     $("divTinyFeed").addEventListener("click", this.focusTinyFeed.bind(this));
-    $("txtTinyFeed").addEventListener("click", this.focusFullFeed.bind(this));
+    $("txtTinyFeed").addEventListener("click", this.focusTinyFeed.bind(this));
 };
 
 
@@ -143,7 +143,10 @@ DetailAssistant.prototype.deactivate = function(event) {
     /* remove any event handlers you added in activate and do any other cleanup that should happen before
        this scene is popped or another scene is pushed on top */
 
-    //Mojo.Event.stopListening(this.controller.get("btnOK"), Mojo.Event.tap, this.okClick.bind(this));
+    $("divFullFeed").removeEventListener("click", this.focusFullFeed);
+    $("txtFullFeed").removeEventListener("click", this.focusFullFeed);
+    $("divTinyFeed").removeEventListener("click", this.focusTinyFeed);
+    $("txtTinyFeed").removeEventListener("click", this.focusTinyFeed);
 };
 
 DetailAssistant.prototype.cleanup = function(event) {
