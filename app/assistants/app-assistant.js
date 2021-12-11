@@ -27,6 +27,14 @@ AppAssistant.prototype.handleLaunch = function(params) {
         Mojo.Log.info("Launch query was: " + appModel.LaunchQuery);
     }
 
+    if (params["sendDataToShare"]) {
+        Mojo.Log.info("Launch with Touch2Share request!");
+		if (appModel.TouchToShareURL != null)
+	        this.SendDataForTouch2Share(appModel.TouchToShareURL);
+		else
+			Mojo.Log.warn("Nothing to share...");
+    }
+
     //if the stage already exists then just bring it into focus
     if (mainStage) {
         var stageController = this.controller.getStageController("");
@@ -34,3 +42,35 @@ AppAssistant.prototype.handleLaunch = function(params) {
     }
     return;
 };
+
+AppAssistant.prototype.SendDataForTouch2Share = function(url, callback) {
+    if (!url) {
+        Mojo.Log.error("Share URL not supplied");
+        return false;
+    }
+	if (callback)
+        callback = callback.bind(this);
+	var params = {data: { target: url, type: "rawdata", mimetype: "text/html" }};
+	Mojo.Log.error("Touch2Share payload is ", JSON.stringify(params));
+
+    this.shareRequest = new Mojo.Service.Request("palm://com.palm.stservice", {
+        method: "shareData",
+        parameters: params,
+		subscribe: true,
+        onSuccess: function(response) {
+            Mojo.Log.info("Touch2Share Success!", JSON.stringify(response));
+            if (callback) {
+                callback(response);
+                return true;
+            }
+        },
+        onFailure: function(response) {
+            Mojo.Log.error("Touch2Share Failure: ", JSON.stringify(response));
+            if (callback) {
+                callback(response);
+                return false;
+            }
+        }
+    });
+    return true;
+}

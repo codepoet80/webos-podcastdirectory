@@ -17,6 +17,7 @@ var AppModel = function() {
     this.LastSearchString = null;
     this.LastSearchResult = [];
     this.LastPodcastSelected = null;
+    this.TouchToShareURL = null;
 
     //Define your app preferences (to be saved by OS)
     this.AppSettingsCurrent = null;

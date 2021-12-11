@@ -65,6 +65,8 @@ DetailAssistant.prototype.activate = function(event) {
     $("txtFullFeed").value = appModel.LastPodcastSelected.url;
     $("txtTinyFeed").value = serviceModel.buildURL("tiny") + "?url=" + serviceModel.base64UrlEncode(appModel.LastPodcastSelected.url) + "&max=" + appModel.AppSettingsCurrent["ShowMax"];
 
+    appModel.TouchToShareURL = "http://podcasts.webosarchive.com/detail.php?id=" + encodeURIComponent(appModel.LastPodcastSelected.id);
+    Mojo.Controller.getAppController().showBanner({ messageText: 'Touch2Share Ready!' }, { source: 'notification' });
     /* put in event handlers here that should only be in effect when this scene is active. For
        example, key handlers that are observing the document */
     // Non-Mojo widgets

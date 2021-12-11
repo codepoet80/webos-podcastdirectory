@@ -9,6 +9,7 @@
     "splashicon": "icon-256.png",
     "uiRevision": "2",
     "theme": "light",
+    "tapToShareSupported": true,
     "universalSearch": {
         "search": {
             "displayName": "Podcast Directory",
