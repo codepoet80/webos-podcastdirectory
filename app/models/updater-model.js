@@ -84,7 +84,7 @@ UpdaterModel.prototype.InstallUpdate = function() {
 }
 
 UpdaterModel.prototype.InstallViaPreware = function(app) {
-    //Ask webOS to launch the video player with the new url
+    //Ask webOS to launch the PreWare with install url
     this.prewareRequest = new Mojo.Service.Request("palm://com.palm.applicationManager", {
         method: "open",
         parameters: {
