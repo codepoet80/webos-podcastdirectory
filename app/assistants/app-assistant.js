@@ -51,7 +51,7 @@ AppAssistant.prototype.SendDataForTouch2Share = function(url, callback) {
 	if (callback)
         callback = callback.bind(this);
 	var params = {data: { target: url, type: "rawdata", mimetype: "text/html" }};
-	Mojo.Log.error("Touch2Share payload is ", JSON.stringify(params));
+	Mojo.Log.info("Touch2Share payload is ", JSON.stringify(params));
 
     this.shareRequest = new Mojo.Service.Request("palm://com.palm.stservice", {
         method: "shareData",
