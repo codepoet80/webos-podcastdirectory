@@ -12,6 +12,8 @@ function MainAssistant() {
 
 MainAssistant.prototype.setup = function() {
 
+    appModel.SetThemePreference(this.controller);
+
     this.controller.setupWidget('txtSearch',
         this.attributes = {
             hintText: 'Search PodcastIndex...',
@@ -94,9 +96,7 @@ MainAssistant.prototype.handleUpdateResponse = function(responseObj) {
 }
 
 MainAssistant.prototype.activate = function(event) {
-    //Load preferences
-    appModel.LoadSettings();
-    Mojo.Log.info("settings now: " + JSON.stringify(appModel.AppSettingsCurrent));
+
     serviceModel.UseCustomEndpoint = appModel.AppSettingsCurrent["UseCustomEndpoint"];
     serviceModel.CustomEndpointURL = appModel.AppSettingsCurrent["EndpointURL"];
     if (appModel.AppSettingsCurrent["FirstRun"]) {
@@ -226,8 +226,10 @@ MainAssistant.prototype.handleListClick = function(event) {
 
 MainAssistant.prototype.getUserRecommendations = function() {
     Mojo.Log.info("Getting User Recommendations from Sharing Service...");
+    this.controller.get('spinnerLoad').mojo.start();
     $("spnResultsTitle").innerHTML = "Recommended by webOS Users";
     shareServiceModel.DoShareListRequest(function(response) {
+        this.controller.get('spinnerLoad').mojo.stop();
         Mojo.Log.info(response);
         try {
             var responseObj = JSON.parse(response);
@@ -251,9 +253,11 @@ MainAssistant.prototype.getUserRecommendations = function() {
 //Send a search request to Podcast Directory
 MainAssistant.prototype.searchPodcasts = function(searchRequest) {
     $("spnResultsTitle").innerHTML = "Search Results";
+    this.controller.get('spinnerLoad').mojo.start();
     Mojo.Log.info("Search requested: " + searchRequest + ", Max: " + appModel.AppSettingsCurrent["SearchResultMax"]);
     this.SearchValue = searchRequest;
     serviceModel.DoPodcastSearchRequest(searchRequest, appModel.AppSettingsCurrent["SearchResultMax"], function(response) {
+        this.controller.get('spinnerLoad').mojo.stop();
         Mojo.Log.info("ready to process search results: " + response);
         if (response != null && response != "") {
             var responseObj = JSON.parse(response);
@@ -302,10 +306,10 @@ MainAssistant.prototype.updateSearchResultsList = function(results) {
 
 MainAssistant.prototype.disableUI = function(statusValue) {
     //start spinner
-    if (!this.spinnerModel.spinning) {
+    /*if (!this.spinnerModel.spinning) {
         this.spinnerModel.spinning = true;
         this.controller.modelChanged(this.spinnerModel);
-    }
+    }*/
 
     if (statusValue && statusValue != "") {
         $("divWorkingStatus").style.display = "block";
@@ -319,12 +323,16 @@ MainAssistant.prototype.disableUI = function(statusValue) {
         this.submitBtnModel.disabled = true;
         this.controller.modelChanged(this.submitBtnModel);
     }
+
+    $("showResultsList").style.display = "none";
 }
 
 MainAssistant.prototype.enableUI = function() {
     //stop spinner
+    /*
     this.spinnerModel.spinning = false;
     this.controller.modelChanged(this.spinnerModel);
+    */
 
     //hide status
     $("divWorkingStatus").style.display = "none";

@@ -8,7 +8,7 @@ Podcast Directory Model - Mojo
 */
 
 var ServiceModel = function() {
-    this.urlBase = "http://podcasts.webosarchive.com";
+    this.urlBase = "http://podcasts.webosarchive.org";
 };
 
 //Properties
