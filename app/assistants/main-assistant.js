@@ -153,7 +153,7 @@ MainAssistant.prototype.handleCommand = function(event) {
                 stageController.pushScene({ name: "preferences", disableSceneScroller: false });
                 break;
             case 'do-myAbout':
-                Mojo.Additions.ShowDialogBox("Podcast Directory - " + Mojo.Controller.appInfo.version, "Retro Podcast Directory client for webOS. Copyright 2021, Jon Wise. Distributed under an MIT License, and powered by PodcastIndex.org.<br>Source code available at: https://github.com/codepoet80/webos-podcastdirectory");
+                Mojo.Additions.ShowDialogBox("Podcast Directory - " + Mojo.Controller.appInfo.version, "Retro Podcast Directory client for webOS. Copyright 2022, webOS Archive. Distributed under an MIT License, and powered by PodcastIndex.org.<br>Source code available at: https://github.com/codepoet80/webos-podcastdirectory");
                 break;
         }
     }

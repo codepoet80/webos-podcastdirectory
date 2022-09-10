@@ -1,7 +1,7 @@
 {
-    "id": "com.jonandnic.podcastdirectory",
+    "id": "org.webosarchive.podcastdirectory",
     "version": "1.3.0",
-    "vendor": "Jon Wise",
+    "vendor": "webOS Archive",
     "type": "web",
     "main": "index.html",
     "title": "Podcast Directory",
@@ -12,7 +12,7 @@
     "universalSearch": {
         "search": {
             "displayName": "Podcast Directory",
-            "url": "com.jonandnic.podcastdirectory",
+            "url": "org.webosarchive.podcastdirectory",
             "launchParam": {
                 "query": "#{searchTerms}"
             }
